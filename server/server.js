@@ -48,7 +48,7 @@ const categoriesRouter = require('./routes/categories')
 const usersRouter = require('./routes/users')
 
 app.use("/api/categories", categoriesRouter)
-app.use("/api/users", usersRouter)
+app.use("/api/users", usersRouter) // TODO сделать авторизацию на JWT
 
 app.listen(port, () => {
   console.log(`✔ Сервер запущен на порту: ${port}`);

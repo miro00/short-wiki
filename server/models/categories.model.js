@@ -23,8 +23,8 @@ module.exports = {
   getByUrl: (db, url, callback) => {
     db.query(`
       SELECT * FROM categories
-      WHERE category_url = ?
-      AND category_parent = 0
+      WHERE category_url = '?'
+      AND category_parent = '0'
     `, url, callback)
   },
 

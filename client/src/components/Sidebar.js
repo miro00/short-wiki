@@ -1,5 +1,4 @@
 import '../scss/Sidebar.scss';
-import Search from "./Search";
 import SidebarListItem from './SidebarListItem';
 import { useState, useEffect } from 'react'
 
@@ -19,7 +18,6 @@ function Sidebar() {
   return (
     <div className="sidebar-wrap">
       <aside className="sidebar">
-        <Search />
         <ul className="menu-list">
           {categories.map(category => (
             <SidebarListItem 

@@ -4,7 +4,7 @@ import { useRouteMatch, useParams } from 'react-router-dom'
 import CategoriesDataService from '../services/categories.service'
 
 export default function CategoryPage() {
-  let { path, url } = useRouteMatch()
+  // let { path, url } = useRouteMatch()
   let { category } = useParams()
   
   const [categoryData, setCategoryData] = useState([])

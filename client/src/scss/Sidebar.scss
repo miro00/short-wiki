@@ -13,34 +13,6 @@
   position: sticky;
   top: 60px;
 
-  .search {
-    // Стили для компонента Search
-    width: 100%;
-    display: flex;
-
-    &-button,
-    &-input {
-      outline: none;
-      border-radius: 0;
-      border: 1px solid gray;
-      font-family: $main-ff;
-    }
-
-    &-button {
-      cursor: pointer;
-    }
-
-    &-input {
-      width: 100%;
-      height: 30px;
-      padding-left: 8px;
-
-      &::-webkit-search-cancel-button {
-        display: none;
-      }
-    }
-  }
-
   .menu-list {
     list-style-type: none;
     padding: 0;

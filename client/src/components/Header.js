@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import UserDataService from '../services/users.service'
 import { Link } from 'react-router-dom'
 
+import Search from "./Search";
 import SignInForm from './SignInForm'
 import UserDropDownMenu from './UserDropDownMenu'
 
@@ -45,6 +46,7 @@ export default function Header() {
           <Link to="/" className="logo">
             ShortWiki
           </Link>
+          <Search />
           <div className="account">
             {loginStatus.loggedIn ? 
             <div className="user">

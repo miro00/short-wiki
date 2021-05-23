@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function CategoryBlock(props) {
   const [iconExists, setIconExists] = useState(false)
@@ -13,13 +14,13 @@ export default function CategoryBlock(props) {
     })
 
   return (
-    <div className="category">
+    <Link to={props.url} className="category">
       {iconExists ? 
         <img src={`https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/${props.url}.svg`} alt="" className="category-logo" />
       : null }
       <div className="category-title">
         {props.title}
       </div>
-    </div>
+    </Link>
   )
 }

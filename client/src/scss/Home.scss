@@ -22,6 +22,8 @@
       transition: transform .2s;
       background-color: transparent;
       transform: scale(1);
+      text-decoration: none;
+      color: #000;
 
       &:hover {
         // background-color: rgba($color: gray, $alpha: .1);
