@@ -1,0 +1,18 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,700;1,600&display=swap");
+@import "./vars";
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  font-family: $main-ff;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  height: 100%;
+}

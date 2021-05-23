@@ -1,0 +1,42 @@
+@import './vars';
+
+.Home {
+  width: 100%;
+  .categories {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .category {
+      width: 180px;
+      height: 80px;
+      border: 2px solid $header-bg-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      user-select: none;
+      cursor: pointer;
+      border-radius: 10px;
+      // transition: background-color .2s;
+      transition: transform .2s;
+      background-color: transparent;
+      transform: scale(1);
+
+      &:hover {
+        // background-color: rgba($color: gray, $alpha: .1);
+        transform: scale(1.1);
+      }
+
+      &-logo {
+        width: 36px;
+        margin-right: 10px;
+      }
+
+      &-title {
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+    }
+  }
+}

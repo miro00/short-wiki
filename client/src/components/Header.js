@@ -1,0 +1,69 @@
+import '../scss/Header.scss';
+
+import { useState, useEffect } from 'react'
+import UserDataService from '../services/users.service'
+import { Link } from 'react-router-dom'
+
+import SignInForm from './SignInForm'
+import UserDropDownMenu from './UserDropDownMenu'
+
+export default function Header() {
+
+  const [showForm, setShowForm] = useState(false)
+  const [showDropDown, setDropDown] = useState(false)
+  const [loginStatus, setLoginStatus] = useState("")
+
+  function showFormEvent() {
+    setShowForm(!showForm)
+  }
+
+  function showDropDownEvent() {
+    setDropDown((!showDropDown))
+  }
+
+  useEffect(() => {
+    UserDataService.getLogin()
+      .then((res) => {
+        if (res.data.loggedIn) {
+          setLoginStatus({
+            loggedIn: true,
+            id: res.data.user[0].id_user,
+            username: res.data.user[0].user_login
+          })
+        } else {
+          setLoginStatus({
+            loggedIn: false
+          })
+        }
+      })
+  }, [])
+
+  return (
+    <header className="header">
+      <div className="container">
+        <div className="header-wrap">
+          <Link to="/" className="logo">
+            ShortWiki
+          </Link>
+          <div className="account">
+            {loginStatus.loggedIn ? 
+            <div className="user">
+              <Link to="/add-article" className="btn add-article">+</Link>
+              <span className="user-username" onClick={showDropDownEvent}>{loginStatus.username}</span>
+              <div className="user-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 10L12 15L17 10H7Z"/>
+                </svg>
+              </div>
+            </div>
+            : 
+            <div className="sign-in" onClick={showFormEvent}>Вход</div>
+            }
+            { showForm ? <SignInForm /> : null }
+            { showDropDown ? <UserDropDownMenu userId={loginStatus.id} /> : null }
+          </div>
+        </div>
+      </div>
+    </header>
+  )
+}
