@@ -29,11 +29,25 @@ module.exports = {
     });
   },
 
-  getByUrl: (req, res) => {
-    Category.getByUrl(req.db, req.body.url, (err, result) => {
-      if (err) console.error(err)
-
+  getSubCategories: (req, res) => {
+    Category.getSubCategories(req.db, (err, result) => {
+      if (err) return console.error(err)
       res.send(result)
     })
   },
+
+  getByUrl: (req, res) => {
+    Category.getByUrl(req.db, req.url.substr(1), (err, result) => {
+      if (err) console.error(err)
+      res.send(result)
+    })
+  },
+
+  getSubCategoriesByParent: (req, res) => {
+    Category.getSubCategoriesByParent(req.db, req.params.id, (err, result) => {
+      if (err) console.error(err)
+      res.send(result)
+    })
+  }
+
 };

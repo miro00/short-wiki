@@ -51,6 +51,9 @@
         svg {
           fill: $main-accent-fc;
         }
+        &:hover svg{
+          fill: $header-bg-color;
+        }
       }
 
       &.collapsed {

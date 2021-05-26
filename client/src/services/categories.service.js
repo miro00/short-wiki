@@ -13,6 +13,9 @@ class CategoriesDataService {
   getByUrl(url) {
     return http.get(`/categories/${url}`)
   }
+  getByParent(id) {
+    return http.get(`/categories/${id}/subcategories`)
+  }
 }
 
 export default new CategoriesDataService()

@@ -18,4 +18,5 @@ module.exports = {
       WHERE user_login = ? AND user_password = ?
     `, [login, password], callback)
   },
+  
 }

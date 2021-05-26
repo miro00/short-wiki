@@ -9,8 +9,8 @@ module.exports = {
   getSubCategories: (db, callback) => {
     db.query(`
       SELECT * FROM categories
-      WHERE category_parent <> ?
-    `, '0', callback)
+      WHERE category_parent <> 0
+    `, callback)
   },
 
   getById: (db, id, callback) => {
@@ -23,9 +23,16 @@ module.exports = {
   getByUrl: (db, url, callback) => {
     db.query(`
       SELECT * FROM categories
-      WHERE category_url = '?'
-      AND category_parent = '0'
+      WHERE category_url = ?
+      AND category_parent = 0
     `, url, callback)
+  },
+
+  getSubCategoriesByParent: (db, id, callback) => {
+    db.query(`
+      SELECT * FROM categories
+      WHERE category_parent = ?
+    `, id, callback)
   },
 
 }

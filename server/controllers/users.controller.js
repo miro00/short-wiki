@@ -31,7 +31,8 @@ module.exports = {
       res.send({loggedIn: false})
     }
   },
-  getById: (req, res) => {
+
+  logout: (req, res) => {
     if (req.session.user) {
       User.getById(req.db, req.session.user[0].id_user, (err, result) => {
         if (err) return console.error(err)
@@ -39,5 +40,13 @@ module.exports = {
         res.send(result)
       })
     }
+  },
+
+  getById: (req, res) => {
+    User.getById(req.db, req.params.id, (err, result) => {
+      if (err) return console.error(err)
+      res.send(result)
+    })
   }
+
 }

@@ -13,6 +13,9 @@ class UsersDataService {
   logOut(id) {
     return http.get('/users/logout')
   }
+  getById(id) {
+    return http.get(`/users/${id}`)
+  }
 }
 
 export default new UsersDataService()

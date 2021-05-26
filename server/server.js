@@ -9,22 +9,12 @@ const db = require('./models/db.model')
 const port = 3001
 
 app.use(cors({
-  origin: ["http://localhost:3000"],
+  origin: ["http://localhost:3000", "http://192.168.1.144:3000"],
   methods: ["GET", "POST"],
   credentials: true
 }))
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
-//     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
-// });
 
 app.use((req, res, next) => {
   req.db = db
@@ -34,7 +24,7 @@ app.use((req, res, next) => {
 app.use(cookieParser())
 app.use(session({
   key: "userId",
-  secret: "qwert123", // TODO сменить
+  secret: "qwert123", // TODO: сменить
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -46,9 +36,11 @@ app.use(session({
 
 const categoriesRouter = require('./routes/categories')
 const usersRouter = require('./routes/users')
+const articlesRouter = require('./routes/articles')
 
 app.use("/api/categories", categoriesRouter)
-app.use("/api/users", usersRouter) // TODO сделать авторизацию на JWT
+app.use("/api/users", usersRouter) // TODO: сделать авторизацию на JWT
+app.use("/api/articles", articlesRouter)
 
 app.listen(port, () => {
   console.log(`✔ Сервер запущен на порту: ${port}`);
