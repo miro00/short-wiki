@@ -10,24 +10,18 @@
       .form-item {
         display: flex;
         flex-direction: column;
-        textarea {
-          width: 100%;
-          min-height: 300px;
-          padding: 20px;
-          resize: vertical;
-        }
         input {
           height: 40px;
           padding: 0 10px;
         }
-        button {
+        button[type="submit"] {
           height: 40px;
           cursor: pointer;
         }
         select {
           height: 40px;
         }
-        textarea, input, button, select {
+        input, button[type="submit"], select {
           border: 2px solid #202020;
           outline: none;
           border-radius: 4px;

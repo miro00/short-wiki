@@ -14,11 +14,12 @@ module.exports = {
   create: (db, data, callback) => {
     db.query(`
       INSERT INTO articles SET
-      article_title = '${data.article_title}',
-      article_url = '${data.article_url}',
-      article_content = '${data.article_content}',
-      article_author = '${data.article_author}',
-      article_category = '${data.article_category}'
-    `, callback)
+      article_title = ?,
+      article_url = ?,
+      article_content = ?,
+      article_author = ?,
+      article_category = ?
+    `, [data.article_title, data.article_url, data.article_content, data.article_author, data.article_category], 
+    callback)
   },
 }

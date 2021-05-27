@@ -1,8 +1,7 @@
 import '../scss/AddArticle.scss'
 
 import { useState, useEffect } from 'react'
-
-import TextAreaOptions from './TextAreaOptions'
+import MDEditor from '@uiw/react-md-editor'
 import CategoriesDataService from '../services/categories.service'
 import ArticleDataService from '../services/articles.service'
 
@@ -47,18 +46,19 @@ export default function AddArticle() {
 
   const createArticle = (e) => {
     e.preventDefault()
-    let data = {
+    let articleData = {
       article_title: articleTitle,
       article_url: articleUrl,
       article_category: articleCategory,
       article_content: articleContent,
       article_author: 1 // FIXME: ИЗМЕНИТЬ НА ДИНАМИКУ
     }
-    console.log(data);
-    // ArticleDataService.create(data)
-    //   .then((res) => {
-    //     console.log(res.data);
-    //   })
+    ArticleDataService.create(articleData)
+      .then((res) => {
+        if (res.status === 200) {
+          window.location.reload()
+        }
+      })
   }
 
   return(
@@ -74,8 +74,8 @@ export default function AddArticle() {
             />
           </div>
           <div className="form-item">
-            <label htmlFor="">Выберите категорию</label>
-            <select name="" id="">
+            <select defaultValue="0">
+            <option disabled value="0">Выберите категорию</option>
               {categories.map(category => (
                 <option value={category.id_category} key={category.id_category}>
                   {category.category_name}
@@ -84,8 +84,8 @@ export default function AddArticle() {
             </select>
           </div>
           <div className="form-item">
-            <label htmlFor="">Выберите подкатегорию</label>
-            <select name="" id="" onChange={(e) => setArticleCategory(e.target.value)}>
+            <select onChange={(e) => setArticleCategory(e.target.value)} defaultValue="0">
+              <option disabled value="0">Выберите подкатегорию</option>
               {subcategories.map(subcategory => (
                 <option value={subcategory.id_category} key={subcategory.id_category}>
                   {subcategory.category_name}
@@ -102,8 +102,7 @@ export default function AddArticle() {
           </div>
           <div className="form-item">
             <label htmlFor="">Текст статьи</label>
-            <TextAreaOptions />
-            <textarea name="" id="" onChange={(e) => setArticleContent(e.target.value)}></textarea>
+            <MDEditor value={articleContent} onChange={setArticleContent} />
           </div>
           <div className="form-item">
             <button type="submit">Сохранить</button>

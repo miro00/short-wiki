@@ -7,8 +7,8 @@ class ArticlesDataService {
   getByCatId(id) {
     return http.get(`/articles/${id}`)
   }
-  create() {
-    return http.post('/articles')
+  create(data) {
+    return http.post('/articles', data)
   }
 }
 

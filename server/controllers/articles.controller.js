@@ -16,7 +16,7 @@ module.exports = {
   },
 
   create: (req, res) => {
-    Article.create(req.db, req.body.data, (err, result) => {
+    Article.create(req.db, req.body, (err, result) => {
       if (err) return console.error(err)
       res.send(result)
     })

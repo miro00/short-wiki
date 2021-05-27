@@ -1,11 +1,8 @@
 import '../scss/Article.scss'
-
 import { useState, useEffect } from 'react'
-
+import MDEditor from '@uiw/react-md-editor'
 import { Person, CalendarToday } from '@material-ui/icons'
-
 import Navigation from './Navigation'
-
 import UserServiceData from '../services/users.service'
 
 export default function Article(props) {
@@ -42,9 +39,11 @@ export default function Article(props) {
           {author.user_login}
         </div>
       </div>
+      {/* <div className="article-content" dangerouslySetInnerHTML={{__html:props.content}}></div> */}
       <div className="article-content">
-        {props.content}
+        <MDEditor.Markdown source={props.content}/>
       </div>
+      
     </article>
   )
 }
