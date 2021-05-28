@@ -1,9 +1,10 @@
 import '../scss/AddArticle.scss'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import MDEditor from '@uiw/react-md-editor'
 import CategoriesDataService from '../services/categories.service'
 import ArticleDataService from '../services/articles.service'
+import { AppContext } from '../context'
 
 export default function AddArticle() {
 
@@ -35,11 +36,11 @@ export default function AddArticle() {
   }
 
  
-
   const [articleTitle, setArticleTitle] = useState("")
   const [articleCategory, setArticleCategory] = useState("")
   const [articleUrl, setArticleUrl] = useState("")
   const [articleContent, setArticleContent] = useState("")
+  const { loginStatus } = useContext(AppContext)
 
   const createArticle = (e) => {
     e.preventDefault()
@@ -48,7 +49,7 @@ export default function AddArticle() {
       article_url: articleUrl,
       article_category: articleCategory,
       article_content: articleContent,
-      article_author: 1 // FIXME: ИЗМЕНИТЬ НА ДИНАМИКУ
+      article_author: loginStatus.username // FIXME: ИЗМЕНИТЬ НА ДИНАМИКУ
     }
     ArticleDataService.create(articleData)
       .then((res) => {
