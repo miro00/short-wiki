@@ -1,7 +1,6 @@
 import '../scss/Header.scss';
 
-import { useState, useEffect, createContext, useContext } from 'react'
-import UserDataService from '../services/users.service'
+import { useState, useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import Search from "./Search";

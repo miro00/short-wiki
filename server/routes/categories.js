@@ -7,5 +7,7 @@ router.get("/", categories_controller.index)
 // router.get("/category:category", categories_controller.getByUrl)
 router.get("/:id/subcategories", categories_controller.getSubCategoriesByParent)
 router.get("/subcategories", categories_controller.getSubCategories)
+router.post('/', categories_controller.create)
+router.post('/subcategories', categories_controller.createSubcategory)
 
 module.exports = router

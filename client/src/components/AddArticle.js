@@ -5,11 +5,15 @@ import MDEditor from '@uiw/react-md-editor'
 import CategoriesDataService from '../services/categories.service'
 import ArticleDataService from '../services/articles.service'
 import { AppContext } from '../context'
+import CreateCategoryForm from './CreateCategoryForm'
+import CreateSubcategoryForm from './CreateSubcategoryForm'
 
 export default function AddArticle() {
 
   const [categories, setCategories] = useState([])
   const [subcategories, setSubcategories] = useState([])
+  const [showCatForm, setshowCatForm] = useState(false)
+  const [showSubcatForm, setShowSubcatForm] = useState(false)
 
   useEffect(() => {
     let cleanupFunction = false
@@ -49,7 +53,7 @@ export default function AddArticle() {
       article_url: articleUrl,
       article_category: articleCategory,
       article_content: articleContent,
-      article_author: loginStatus.username // FIXME: ИЗМЕНИТЬ НА ДИНАМИКУ
+      article_author: loginStatus.id
     }
     ArticleDataService.create(articleData)
       .then((res) => {
@@ -59,19 +63,28 @@ export default function AddArticle() {
       })
   }
 
+  const showCreateCategoryForm = (val) => {
+    setshowCatForm(val)
+  }
+
+  const showCreateSubcategoryForm = (val) => {
+    setShowSubcatForm(val)
+  }
+
+  if (showCatForm || showSubcatForm) {
+    document.body.style.overflow = 'hidden'
+  } else {
+    document.body.style.overflow = 'auto'
+  }
+
   return(
     <div className="AddArticle">
+      {showCatForm ? <CreateCategoryForm updateData={showCreateCategoryForm} /> : null}
+      {showSubcatForm ? <CreateSubcategoryForm updateData={showCreateSubcategoryForm} categories={categories} /> : null}
       <h1>Добавить запись</h1>
-      <form onSubmit={createArticle}>
+      <form onSubmit={createArticle} className="article-form">
         <div className="form-items">
-          <div className="form-item">
-            <label htmlFor="">Название статьи</label>
-            <input type="text" name="" 
-              placeholder="Например: Тестовая статья" 
-              onChange={(e) => setArticleTitle(e.target.value)} 
-            />
-          </div>
-          <div className="form-item">
+          <div className="form-item select">
             <select defaultValue="0" onChange={(e) => selectCategory(e.target.value)}>
             <option disabled value="0">Выберите категорию</option>
               {categories.map(category => (
@@ -80,8 +93,9 @@ export default function AddArticle() {
                 </option>
               ))}
             </select>
+            <div className="btn createCategory" onClick={showCreateCategoryForm}>+</div>
           </div>
-          <div className="form-item">
+          <div className="form-item select">
             <select onChange={(e) => setArticleCategory(e.target.value)} defaultValue="0">
               <option disabled value="0">Выберите подкатегорию</option>
               {subcategories.map(subcategory => (
@@ -90,6 +104,14 @@ export default function AddArticle() {
                 </option>
               ))}
             </select>
+            <div className="btn createSubcategory" onClick={showCreateSubcategoryForm}>+</div>
+          </div>
+          <div className="form-item">
+            <label htmlFor="">Название статьи</label>
+            <input type="text" name="" 
+              placeholder="Например: Тестовая статья" 
+              onChange={(e) => setArticleTitle(e.target.value)} 
+            />
           </div>
           <div className="form-item">
             <label htmlFor="">URL статьи</label>

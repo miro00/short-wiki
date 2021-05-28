@@ -16,6 +16,12 @@ class CategoriesDataService {
   getByParent(id) {
     return http.get(`/categories/${id}/subcategories`)
   }
+  createCategory(data) {
+    return http.post('/categories', data)
+  }
+  createSubcategory(data) {
+    return http.post('/categories/subcategories', data)
+  }
 }
 
 export default new CategoriesDataService()

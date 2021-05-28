@@ -2,7 +2,7 @@
 
 .AddArticle {
   width: 100%;
-  form {
+  .article-form {
     width: 70%;
     // margin: 0 auto;
     .form-items {
@@ -46,6 +46,25 @@
           border: 1px solid #dfdfe0;
           outline: none;
           border-radius: 3px;
+        }
+
+        &.select {
+          flex-direction: row;
+          select {
+            width: 100%;
+          }
+          .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 40px;
+            width: 40px;
+            border: 1px solid #dfdfe0;
+            user-select: none;
+            cursor: pointer;
+            border-radius: 3px;
+            margin-left: 10px;
+          }
         }
       }
     }

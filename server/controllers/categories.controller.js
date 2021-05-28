@@ -38,14 +38,28 @@ module.exports = {
 
   getByUrl: (req, res) => {
     Category.getByUrl(req.db, req.url.substr(1), (err, result) => {
-      if (err) console.error(err)
+      if (err) return console.error(err)
       res.send(result)
     })
   },
 
   getSubCategoriesByParent: (req, res) => {
     Category.getSubCategoriesByParent(req.db, req.params.id, (err, result) => {
-      if (err) console.error(err)
+      if (err) return console.error(err)
+      res.send(result)
+    })
+  },
+
+  create: (req, res) => {
+    Category.create(req.db, req.body, (err, result) => {
+      if (err) return console.error(err)
+      res.send(result)
+    })
+  },
+
+  createSubcategory: (req, res) => {
+    Category.createSubcategory(req.db, req.body, (err, result) => {
+      if (err) return console.error(err)
       res.send(result)
     })
   }

@@ -9,6 +9,7 @@
 body {
   width: 100%;
   font-family: $main-ff;
+  padding: 0 calc(17px - (100vw - 100%)) 0 0;
 }
 
 .container {
