@@ -9,7 +9,6 @@ export default function AddArticle() {
 
   const [categories, setCategories] = useState([])
   const [subcategories, setSubcategories] = useState([])
-  const [category, setCategory] = useState("")
 
   useEffect(() => {
     let cleanupFunction = false
@@ -24,42 +23,17 @@ export default function AddArticle() {
       }
     }
 
-    const fetchSubcategories = async () => {
-      try {
-        await CategoriesDataService.getSubCategories()
-          .then((res) => {
-            if (!cleanupFunction) setSubcategories(res.data)
-          })
-      } catch (e) {
-        console.error(e.message)
-      }
-    } 
-
-    const fetchSubcategoriesByParent = async (id) => {
-      try {
-        await CategoriesDataService.getByParent(id)
-          .then((res) => {
-            if (!cleanupFunction) setSubcategories(res.data)
-          })
-      } catch (e) {
-        console.error(e.message)
-      }
-    }
-
-    fetchCategories()
-    // fetchSubcategories()
-   
+    fetchCategories()    
     return () => cleanupFunction = true
   }, [])
-  
-  const selectCategory = (e) => {
-    setCategory(e.target.value)
-    console.log(category)
-    CategoriesDataService.getByParent(category)
+
+  const selectCategory = (value) => {
+    CategoriesDataService.getByParent(value)
       .then((res) => {
         setSubcategories(res.data)
       })
   }
+
  
 
   const [articleTitle, setArticleTitle] = useState("")
@@ -97,7 +71,7 @@ export default function AddArticle() {
             />
           </div>
           <div className="form-item">
-            <select defaultValue="0" onChange={selectCategory}>
+            <select defaultValue="0" onChange={(e) => selectCategory(e.target.value)}>
             <option disabled value="0">Выберите категорию</option>
               {categories.map(category => (
                 <option value={category.id_category} key={category.id_category}>

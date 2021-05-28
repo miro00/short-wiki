@@ -39,6 +39,8 @@ export default function Header() {
       })
   }, [])
 
+  const UserInfo = createContext(loginStatus)  
+
   return (
     <header className="header">
       <div className="container">
