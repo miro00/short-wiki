@@ -1,18 +1,20 @@
 import '../scss/Header.scss';
 
-import { useState, useEffect, createContext } from 'react'
+import { useState, useEffect, createContext, useContext } from 'react'
 import UserDataService from '../services/users.service'
 import { Link } from 'react-router-dom'
 
 import Search from "./Search";
 import SignInForm from './SignInForm'
 import UserDropDownMenu from './UserDropDownMenu'
+import { AppContext } from '../context';
 
 export default function Header() {
 
   const [showForm, setShowForm] = useState(false)
   const [showDropDown, setDropDown] = useState(false)
-  const [loginStatus, setLoginStatus] = useState("")
+
+  const { loginStatus } = useContext(AppContext)
 
   function showFormEvent() {
     setShowForm(!showForm)
@@ -21,25 +23,6 @@ export default function Header() {
   function showDropDownEvent() {
     setDropDown((!showDropDown))
   }
-
-  useEffect(() => {
-    UserDataService.getLogin()
-      .then((res) => {
-        if (res.data.loggedIn) {
-          setLoginStatus({
-            loggedIn: true,
-            id: res.data.user[0].id_user,
-            username: res.data.user[0].user_login
-          })
-        } else {
-          setLoginStatus({
-            loggedIn: false
-          })
-        }
-      })
-  }, [])
-
-  const UserInfo = createContext(loginStatus)  
 
   return (
     <header className="header">
