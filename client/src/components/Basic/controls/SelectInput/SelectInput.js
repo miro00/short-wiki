@@ -12,9 +12,9 @@ export default function SelectInput(props) {
 
   useEffect(() => {
     if (visible) {
-      document.addEventListener('click', handleClickOutside)
+      document.addEventListener('mousedown', handleClickOutside)
     } else {
-      document.removeEventListener('click', handleClickOutside)
+      document.removeEventListener('mousedown', handleClickOutside)
     }
 
     return () => {
@@ -59,7 +59,7 @@ export default function SelectInput(props) {
 
   return(
     <div className="SelectInput" ref={node}>
-      <div className="select" id={props.id} onMouseUp={showDropDown}>{props.defaultTitle}</div>
+      <div className="select" id={props.id} onMouseDown={showDropDown}>{props.defaultTitle}</div>
       <div className={`drop${visible ? " visible" : ""}`}>
         <div className="select-search">
           <input type="text" autoComplete="off" placeholder="Поиск" onChange={filterList} />
