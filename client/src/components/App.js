@@ -1,6 +1,6 @@
 import '../scss/App.scss';
-import Header from './Header';
-import MainWrapper from './MainWrapper';
+import Header from './Basic/Header/Header';
+import MainWrapper from './Basic/MainWrapper/MainWrapper';
 import { useEffect, useState } from 'react'
 import UserDataService from '../services/users.service'
 import { AppContext } from '../context'
@@ -25,7 +25,7 @@ export default function App() {
         }
       })
   }, [])
- 
+
 
   return (
     <div className="App">

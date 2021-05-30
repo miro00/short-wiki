@@ -15,7 +15,7 @@ module.exports = {
 
   getById: (db, id, callback) => {
     db.query(`
-      SELECT * FROM categories 
+      SELECT * FROM categories
       WHERE id_category = ?
     `, id, callback)
   },

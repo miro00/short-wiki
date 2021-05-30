@@ -1,0 +1,10 @@
+@import "../../../scss/vars";
+
+.main {
+  width: 100%;
+
+  &-wrapper {
+    width: 100%;
+    display: flex;
+  }
+}

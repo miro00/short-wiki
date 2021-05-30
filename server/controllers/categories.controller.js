@@ -7,7 +7,7 @@ module.exports = {
       let rs = result;
       Category.getSubCategories(req.db, (err, result) => {
         if (err) return console.error(err);
-      
+
         result.forEach((subcat) => {
           rs.forEach((cat) => {
             let subcategory = {};
