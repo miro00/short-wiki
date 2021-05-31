@@ -1,6 +1,6 @@
 import './CreateCategoryForm.scss'
 import { useState } from 'react'
-import CategoryDataService from '../../../services/categories.service'
+import SubcategoryDataService from '../../../services/subcategories.service'
 import SelectInput from '../../Basic/controls/SelectInput/SelectInput'
 
 export default function CreateCategoryForm(props) {
@@ -12,10 +12,10 @@ export default function CreateCategoryForm(props) {
 
   const createSubcategory = (e) => {
     e.preventDefault()
-    CategoryDataService.createSubcategory({
-      category_name: subcategoryName,
-      category_url: subcategoryURL,
-      category_parent: selectCategory
+    SubcategoryDataService.create({
+      name: subcategoryName,
+      url: subcategoryURL,
+      parent: selectCategory
     }).then((res) => {
       window.location.reload()
     })

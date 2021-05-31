@@ -3,10 +3,6 @@ import {
   Route,
 } from 'react-router-dom'
 import './Content.scss';
-import { useState, useEffect } from 'react'
-
-import CategoriesDataService from '../../../services/categories.service'
-import ArticleDataService from '../../../services/articles.service'
 
 import Home from '../../Pages/Home/Home'
 import AddArticle from '../../Pages/AddArticle/AddArticle'
@@ -16,92 +12,29 @@ import Article from '../../Pages/Article/Article'
 
 import TestPage from '../../Pages/TestPage/TestPage'
 
-export default function Content() {
-
-  const [categories, setCategories] = useState([])
-  const [subcategories, setSubcategories] = useState([])
-  const [articles, setArticles] = useState([])
-
-  useEffect(() => {
-    let cleanupFunction = false
-
-    const fetchCategories = async () => {
-      try {
-        await CategoriesDataService.getAll()
-          .then((res) => {
-            if (!cleanupFunction) setCategories(res.data)
-          })
-      } catch (e) {
-        console.error(e.message)
-      }
-    }
-
-    const fetchSubcategories = async () => {
-      try {
-        await CategoriesDataService.getSubCategories()
-          .then((res) => {
-            if (!cleanupFunction) setSubcategories(res.data)
-          })
-      } catch (e) {
-        console.error(e.message)
-      }
-    }
-
-    const fetchArticles = async () => {
-      try {
-        await ArticleDataService.getAll()
-          .then((res) => {
-            if (!cleanupFunction) setArticles(res.data)
-          })
-      } catch (e) {
-        console.error(e.message)
-      }
-    }
-
-    fetchCategories()
-    fetchSubcategories()
-    fetchArticles()
-
-    return () => cleanupFunction = true
-
-  }, [])
-
-  // useEffect(() => {
-  //   CategoriesDataService.getAll()
-  //     .then((res) => {
-  //       setCategories(res.data)
-  //     })
-  //   CategoriesDataService.getSubCategories()
-  //     .then((res) => {
-  //       setSubcategories(res.data)
-  //     })
-  //   ArticleDataService.getAll()
-  //     .then((res) => {
-  //       setArticles(res.data)
-  //     })
-  // }, [])
+export default function Content(props) {
 
   return (
     <main className="content">
       <div className="content-container">
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home categories={props.categories} subcategories={props.subcategories} />
             </Route>
             <Route exact path="/add-article">
               <AddArticle />
             </Route>
-            {categories.map(category => (
+            {props.categories.map(category => (
               <Route exact path={`/${category.category_url}`} key={category.id_category}>
                 <CategoryPage id={category.id_category} title={category.category_name} url={category.category_url} />
               </Route>
             ))}
-            {subcategories.map(subcategory => (
-              <Route exact path={`/${subcategory.category_url}`} key={subcategory.id_category}>
-                <SubcategoryPage id={subcategory.id_category} title={subcategory.category_name} url={subcategory.category_url} />
+            {props.subcategories.map(subcategory => (
+              <Route exact path={`/:category/${subcategory.subcategory_url}`} key={subcategory.id_subcategory}>
+                <SubcategoryPage id={subcategory.id_subcategory} parent={subcategory.subcategory_parent} title={subcategory.subcategory_name} url={subcategory.subcategory_url}/>
               </Route>
             ))}
-            {articles.map(article => (
+            {props.articles.map(article => (
               <Route exact path={`/:category/:subcategory/${article.article_url}`} key={article.id_article}>
                 <Article id={article.id_article}
                   title={article.article_title}

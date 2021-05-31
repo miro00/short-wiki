@@ -6,7 +6,6 @@ import Navigation from '../../Basic/Navigation/Navigation'
 import UserServiceData from '../../../services/users.service'
 
 export default function Article(props) {
-
   const [author, setAuthor] = useState("")
 
   useEffect(() => {
@@ -39,7 +38,6 @@ export default function Article(props) {
           {author.user_login}
         </div>
       </div>
-      {/* <div className="article-content" dangerouslySetInnerHTML={{__html:props.content}}></div> */}
       <div className="article-content">
         <MDEditor.Markdown source={props.content}/>
       </div>

@@ -1,25 +1,41 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import SubcategoriesDataService from '../../../services/subcategories.service'
 
 export default function CategoryBlock(props) {
-  const [iconExists, setIconExists] = useState(false)
 
-  fetch(`https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/${props.url}.svg`)
-    .then((res) => {
-      if (!res.ok) {
-        return setIconExists(false)
-      } else {
-        setIconExists(true)
+  const [subcategories, setSubcategories] = useState([])
+
+  useEffect(() => {
+    let isMounted = true
+    const fetchSubcategories = async (id) => {
+      try {
+        await SubcategoriesDataService.getByParentId(id)
+          .then((res) => {
+            if (isMounted) setSubcategories(res.data)
+          })
+      } catch (e) {
+        console.error(e.message)
       }
-    })
+    }
+
+    fetchSubcategories(props.id)
+    
+    return () => isMounted = false
+    
+  }, [props.id])
+
 
   return (
     <Link to={props.url} className="category">
-      {iconExists ? 
-        <img src={`https://cdn.jsdelivr.net/npm/simple-icons@v4/icons/${props.url}.svg`} alt="" className="category-logo" />
-      : null }
-      <div className="category-title">
+      <div className="category-item category-title">
         {props.title}
+      </div>
+      <div className="category-item">
+        {subcategories.length}
+      </div>
+      <div className="category-item">
+        0
       </div>
     </Link>
   )

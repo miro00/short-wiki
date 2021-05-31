@@ -19,14 +19,14 @@ module.exports =  {
     db.query(`
       SELECT * FROM subcategories
       WHERE id_subcategory = ?
-    `, [id], callback)
+    `, id, callback)
   },
 
   getByParentId: (db, id, callback) => {
     db.query(`
       SELECT * FROM subcategories
       WHERE subcategory_parent = ?
-    `, [id], callback)
+    `, id, callback)
   },
 
   update: (db, id, data, callback) => {
@@ -43,7 +43,7 @@ module.exports =  {
     db.query(`
       DELETE FROM subcategories
       WHERE id_subcategory = ?
-    `, [id], callback)
+    `, id, callback)
   },
 
 }

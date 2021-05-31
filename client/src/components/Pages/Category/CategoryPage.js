@@ -2,13 +2,13 @@ import './CategoryPage.scss'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-import CategoriesDataService from '../../../services/categories.service'
+import SubcategoriesDataService from '../../../services/subcategories.service'
 
 export default function CategoryPage(props) {
   const [subcategories, setSubcategories] = useState([])
 
   useEffect(() => {
-    CategoriesDataService.getByParent(props.id)
+    SubcategoriesDataService.getByParentId(props.id)
       .then((res) => {
         setSubcategories(res.data)
       })
@@ -20,9 +20,9 @@ export default function CategoryPage(props) {
       <h1>{props.title}</h1>
       <ol>
         {subcategories.map(subcategory => (
-          <li key={subcategory.id_category}>
-            <Link to={`/${subcategory.category_url}`}>
-              {subcategory.category_name}
+          <li key={subcategory.id_subcategory}>
+            <Link to={`/${props.url}/${subcategory.subcategory_url}`}>
+              {subcategory.subcategory_name}
             </Link>
           </li>
         ))}

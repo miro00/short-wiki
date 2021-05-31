@@ -3,6 +3,7 @@ import './AddArticle.scss'
 import { useState, useEffect, useContext } from 'react'
 import MDEditor from '@uiw/react-md-editor'
 import CategoriesDataService from '../../../services/categories.service'
+import SubcategoriesDataService from '../../../services/subcategories.service'
 import ArticleDataService from '../../../services/articles.service'
 import { AppContext } from '../../../context'
 import CreateCategoryForm from './CreateCategoryForm'
@@ -46,14 +47,14 @@ export default function AddArticle() {
   }, [])
 
   const selectCategory = (value) => {
-    CategoriesDataService.getByParent(value)
+    SubcategoriesDataService.getByParentId(value)
       .then((res) => {
         let item = {}
         let items = []
         res.data.forEach(data => {
           item = {
-            id: data.id_category,
-            title: data.category_name
+            id: data.id_subcategory,
+            title: data.subcategory_name
           }
           items.push(item)
         })

@@ -10,7 +10,7 @@ const port = 3001
 
 app.use(cors({
   origin: ["http://localhost:3000", "http://192.168.1.144:3000"],
-  methods: ["GET", "POST"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
 app.use(express.urlencoded({ extended: true }));
@@ -37,7 +37,7 @@ app.use(session({
 const categoriesRouter = require('./routes/categories')
 const usersRouter = require('./routes/users')
 const articlesRouter = require('./routes/articles')
-const subcategoriesRouter = require('./routes/subcategories.route')
+const subcategoriesRouter = require('./routes/subcategories')
 
 app.use("/api/categories", categoriesRouter)
 app.use("/api/users", usersRouter) // TODO: сделать авторизацию на JWT

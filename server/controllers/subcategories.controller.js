@@ -24,9 +24,8 @@ module.exports = {
   },
 
   getByParentId: (req, res) => {
-    Subcategories.getByParentId(req.db, res.params.id, (err, result) => {
+    Subcategories.getByParentId(req.db, req.params.id, (err, result) => {
       if (err) console.error(err)
-      console.log(res.params)
       res.send(result)
     })
   },

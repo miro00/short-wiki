@@ -2,14 +2,6 @@ module.exports = {
   get: (db, callback) => {
     db.query(`
       SELECT * FROM categories
-      WHERE category_parent = 0
-    `, callback)
-  },
-
-  getSubCategories: (db, callback) => {
-    db.query(`
-      SELECT * FROM categories
-      WHERE category_parent <> 0
     `, callback)
   },
 
@@ -28,13 +20,6 @@ module.exports = {
     `, url, callback)
   },
 
-  getSubCategoriesByParent: (db, id, callback) => {
-    db.query(`
-      SELECT * FROM categories
-      WHERE category_parent = ?
-    `, id, callback)
-  },
-
   create: (db, data, callback) => {
     db.query(`
       INSERT INTO categories SET
@@ -42,15 +27,6 @@ module.exports = {
       category_url = ?,
       category_parent = 0
     `, [data.category_name, data.category_url], callback)
-  },
-
-  createSubcategory: (db, data, callback) => {
-    db.query(`
-      INSERT INTO categories SET
-      category_name = ?,
-      category_url = ?,
-      category_parent = ?
-    `, [data.category_name, data.category_url, data.category_parent], callback)
   },
 
 }
