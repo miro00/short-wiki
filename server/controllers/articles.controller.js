@@ -20,5 +20,12 @@ module.exports = {
       if (err) return console.error(err)
       res.send(result)
     })
-  }
+  },
+
+  update: (req, res) => {
+    Article.update(req.db, req.params.id, req.body, (err, result) => {
+      if (err) return console.error(err)
+      res.send(result)
+    })
+  },
 }

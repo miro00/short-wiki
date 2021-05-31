@@ -30,5 +30,12 @@ module.exports = {
     })
   },
 
+  getArticles: (req, res) => {
+    Category.getArticles(req.db, req.params.id, (err, result) => {
+      if (err) return console.error(err)
+      res.send(result)
+    })
+  },
+
 
 };

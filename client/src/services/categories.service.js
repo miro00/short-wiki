@@ -16,6 +16,10 @@ class CategoriesDataService {
   createCategory(data) {
     return http.post('/categories', data)
   }
+
+  getArticles(id) {
+    return http.get(`/categories/${id}/articles`)
+  }
 }
 
 export default new CategoriesDataService()

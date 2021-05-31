@@ -127,17 +127,6 @@ export default function AddArticle() {
             />
             <div className="btn createSubcategory" onClick={showCreateSubcategoryForm}>+</div>
           </div>
-          {/* <div className="form-item select">
-            <select onChange={(e) => setArticleCategory(e.target.value)} defaultValue="0">
-              <option disabled value="0">Выберите подкатегорию</option>
-              {subcategories.map(subcategory => (
-                <option value={subcategory.id_category} key={subcategory.id_category}>
-                  {subcategory.category_name}
-                </option>
-              ))}
-            </select>
-
-          </div> */}
           <div className="form-item">
             <label htmlFor="">Название статьи</label>
             <input type="text" name=""

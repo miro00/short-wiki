@@ -29,4 +29,13 @@ module.exports = {
     `, [data.category_name, data.category_url], callback)
   },
 
+  getArticles: (db, id, callback) => {
+    db.query(`
+      SELECT *, subcategories.subcategory_parent 
+      FROM articles
+      LEFT JOIN subcategories ON subcategories.id_subcategory = article_category
+      WHERE subcategories.subcategory_parent = ?
+    `, id, callback)
+  }
+
 }

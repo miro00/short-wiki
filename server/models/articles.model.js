@@ -11,6 +11,7 @@ module.exports = {
       WHERE article_category = ?
     `, id, callback)
   },
+  
   create: (db, data, callback) => {
     db.query(`
       INSERT INTO articles SET
@@ -21,5 +22,15 @@ module.exports = {
       article_category = ?
     `, [data.article_title, data.article_url, data.article_content, data.article_author, data.article_category], 
     callback)
+  },
+
+  update: (db, id, data, callback) => {
+    db.query(`
+      UPDATE articles SET
+      article_title =?,
+      article_url = ?,
+      article_content = ?
+      WHERE id_article = ?
+    `, [data.article_title, data.article_url, data.article_content, id], callback)
   },
 }

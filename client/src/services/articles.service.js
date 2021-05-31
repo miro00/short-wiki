@@ -10,6 +10,9 @@ class ArticlesDataService {
   create(data) {
     return http.post('/articles', data)
   }
+  update(id, data) {
+    return http.put(`/articles/${id}`, data)
+  }
 }
 
 export default new ArticlesDataService()

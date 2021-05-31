@@ -6,6 +6,7 @@ import './Content.scss';
 
 import Home from '../../Pages/Home/Home'
 import AddArticle from '../../Pages/AddArticle/AddArticle'
+import EditArticle from '../../Pages/EditArticle/EditArticle'
 import CategoryPage from '../../Pages/Category/CategoryPage'
 import SubcategoryPage from '../../Pages/Subcategory/SubcategoryPage'
 import Article from '../../Pages/Article/Article'
@@ -43,6 +44,11 @@ export default function Content(props) {
                   date={article.article_date}
                   author={article.article_author}
                 />
+              </Route>
+            ))}
+            {props.articles.map(article => (
+              <Route exact path={`/:category/:subcategory/${article.article_url}/edit`} key={article.id_article}>
+                <EditArticle article={article} />
               </Route>
             ))}
             <Route exact path='/test'>
