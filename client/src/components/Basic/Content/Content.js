@@ -1,8 +1,7 @@
-import {
-  Switch,
-  Route,
-} from 'react-router-dom'
 import './Content.scss';
+
+import { Switch, Route } from 'react-router-dom'
+import { useContext } from 'react'
 
 import Home from '../../Pages/Home/Home'
 import AddArticle from '../../Pages/AddArticle/AddArticle'
@@ -12,9 +11,10 @@ import SubcategoryPage from '../../Pages/Subcategory/SubcategoryPage'
 import Article from '../../Pages/Article/Article'
 
 import TestPage from '../../Pages/TestPage/TestPage'
+import { AppContext } from '../../../context';
 
 export default function Content(props) {
-
+  const { loginStatus } = useContext(AppContext)
   return (
     <main className="content">
       <div className="content-container">
@@ -22,9 +22,18 @@ export default function Content(props) {
             <Route exact path="/">
               <Home categories={props.categories} subcategories={props.subcategories} />
             </Route>
+            {loginStatus.loggedIn ? 
             <Route exact path="/add-article">
               <AddArticle />
             </Route>
+            : null}
+            {loginStatus.loggedIn ? 
+              props.articles.map(article => (
+                <Route exact path={`/:category/:subcategory/${article.article_url}/edit`} key={article.id_article}>
+                  <EditArticle article={article} />
+                </Route>
+              ))
+            : null}
             {props.categories.map(category => (
               <Route exact path={`/${category.category_url}`} key={category.id_category}>
                 <CategoryPage id={category.id_category} title={category.category_name} url={category.category_url} />
@@ -46,11 +55,7 @@ export default function Content(props) {
                 />
               </Route>
             ))}
-            {props.articles.map(article => (
-              <Route exact path={`/:category/:subcategory/${article.article_url}/edit`} key={article.id_article}>
-                <EditArticle article={article} />
-              </Route>
-            ))}
+            
             <Route exact path='/test'>
               <TestPage/>
             </Route>
