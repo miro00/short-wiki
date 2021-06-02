@@ -16,7 +16,8 @@ export default function App() {
           setLoginStatus({
             loggedIn: true,
             id: res.data.user[0].id_user,
-            username: res.data.user[0].user_login
+            username: res.data.user[0].user_login,
+            user_group: res.data.user[0].user_group
           })
         } else {
           setLoginStatus({

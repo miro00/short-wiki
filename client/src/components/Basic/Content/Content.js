@@ -9,8 +9,10 @@ import EditArticle from '../../Pages/EditArticle/EditArticle'
 import CategoryPage from '../../Pages/Category/CategoryPage'
 import SubcategoryPage from '../../Pages/Subcategory/SubcategoryPage'
 import Article from '../../Pages/Article/Article'
+import NotFound from '../../Pages/404/404'
 
 import TestPage from '../../Pages/TestPage/TestPage'
+import Control from '../../Pages/Control/Control'
 import { AppContext } from '../../../context';
 
 export default function Content(props) {
@@ -56,8 +58,19 @@ export default function Content(props) {
               </Route>
             ))}
             
-            <Route exact path='/test'>
-              <TestPage/>
+            {loginStatus.loggedIn && loginStatus.user_group === 1 ? ( // Страницы доступные для администрации
+            <>
+              <Route exact path='/control'>
+                <Control />
+              </Route>
+              <Route exact path='/test'>
+                <TestPage/>
+              </Route>
+            </> 
+            ) : <></>}
+
+            <Route path="*">
+              <NotFound />
             </Route>
           </Switch>
       </div>

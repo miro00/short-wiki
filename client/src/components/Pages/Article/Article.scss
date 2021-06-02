@@ -25,5 +25,27 @@
       color: #707070;
       font-size: 0.9em;
     }
+
+    .article-options {
+      margin-left: auto;
+      display: flex;
+
+      &__btn {
+        cursor: pointer;
+        svg {
+          width: 24px;
+          height: 24px;
+          transition: fill .2s;
+        }
+
+        &:not(:last-child) {
+          margin-right: 20px;
+        }
+
+        &:hover svg {
+          fill: $header-bg-color;
+        }
+      }
+    }
   }
 }
