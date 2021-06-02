@@ -24,7 +24,7 @@ app.use((req, res, next) => {
 app.use(cookieParser())
 app.use(session({
   key: "userId",
-  secret: "qwert123", // TODO: сменить
+  secret: "qwert123", // FIXME: сменить
   resave: false,
   saveUninitialized: false,
   cookie: {
@@ -40,7 +40,7 @@ const articlesRouter = require('./routes/articles')
 const subcategoriesRouter = require('./routes/subcategories')
 
 app.use("/api/categories", categoriesRouter)
-app.use("/api/users", usersRouter) // TODO: сделать авторизацию на JWT
+app.use("/api/users", usersRouter) // FIXME: сделать авторизацию на JWT
 app.use("/api/articles", articlesRouter)
 app.use("/api/subcategories", subcategoriesRouter)
 

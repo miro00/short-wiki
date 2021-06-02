@@ -14,9 +14,20 @@
     user-select: none;
     height: inherit;
     display: flex;
-    padding-left: 16px;
+    padding: 0px 16px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    svg {
+      transform: rotate(-90deg);
+      transition: transform .2s;
+    }
+  }
+
+  .drop.visible + .select {
+    svg {
+      transform: rotate(0deg);
+    }
   }
 
   .drop {

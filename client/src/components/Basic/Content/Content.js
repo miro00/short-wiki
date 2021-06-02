@@ -67,7 +67,7 @@ export default function Content(props) {
                 <TestPage/>
               </Route>
             </> 
-            ) : <></>}
+            ) : null}
 
             <Route path="*">
               <NotFound />

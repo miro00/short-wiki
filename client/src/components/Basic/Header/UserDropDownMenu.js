@@ -1,7 +1,12 @@
 import './DropDownMenu.scss'
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import UserDataService from '../../../services/users.service'
+import { AppContext } from '../../../context'
 
 export default function UserDropDownMenu(props) {
+
+  const  { loginStatus } = useContext(AppContext)
 
   function logOutEvent() {
     UserDataService.logOut(props.userId)
@@ -15,6 +20,11 @@ export default function UserDropDownMenu(props) {
   return (
     <div className="dropDownMenu">
       <div className="dropDownMenu-items">
+        {loginStatus.user_group === 1 ? 
+        <Link to="/control" className="dropDownMenu-item" style={{color: '#000'}}>
+          Админ-панель
+        </Link>
+        : null}
         <div className="dropDownMenu-item">
           Аккаунт
         </div>

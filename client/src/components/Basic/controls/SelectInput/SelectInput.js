@@ -1,5 +1,6 @@
 import './SelectInput.scss'
 import { useState, useRef, useEffect } from 'react'
+import { ExpandMore } from '@material-ui/icons'
 
 export default function SelectInput(props) {
   const [visible, setVisible] = useState(false)
@@ -59,7 +60,10 @@ export default function SelectInput(props) {
 
   return(
     <div className="SelectInput" ref={node}>
-      <div className="select" id={props.id} onMouseDown={showDropDown}>{props.defaultTitle}</div>
+      <div className="select" id={props.id} onMouseDown={showDropDown}>
+        <span>{props.defaultTitle}</span>
+        <ExpandMore />
+      </div>
       <div className={`drop${visible ? " visible" : ""}`}>
         <div className="select-search">
           <input type="text" autoComplete="off" placeholder="Поиск" onChange={filterList} />
