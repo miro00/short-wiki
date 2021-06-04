@@ -17,6 +17,8 @@ export default function AddUser() {
     }
   ]
 
+  console.log(choosenGroup)
+
   return (
     <form className="AddUser">
       <div className="form-items">

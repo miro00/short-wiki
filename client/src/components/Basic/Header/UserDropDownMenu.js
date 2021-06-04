@@ -1,7 +1,7 @@
 import './DropDownMenu.scss'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
-import UserDataService from '../../../services/users.service'
+// import UserDataService from '../../../services/users.service'
 import { AppContext } from '../../../context'
 
 export default function UserDropDownMenu(props) {
