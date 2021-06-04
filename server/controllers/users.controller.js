@@ -1,5 +1,7 @@
 const User = require('../models/users.model')
-
+const jwt = require('jsonwebtoken')
+require('dotenv').config()
+const accessTokenSecret = 'secrettoneeffeenfefefes' //FIXME: поменять токен jwt
 module.exports = {
   index: (req, res) => {
     User.get(req.db, (err, result) => {
@@ -11,8 +13,11 @@ module.exports = {
     User.login(req.db, req.body.userLogin, req.body.userPassword, (err, result) => {
       if (err) return console.error(err)
       if (result.length) {
-        req.session.user = result
-        res.send(result)
+        const accessToken = jwt.sign({
+          loggedIn: true,
+          user: result
+        }, accessTokenSecret, {expiresIn: '24h'})
+        res.json({accessToken, token: accessToken})
       } else {
         res.send({
           message: "Пользователь не найден"
@@ -20,12 +25,15 @@ module.exports = {
       }
     })
   },
+
   getLogin: (req, res) => {
-    if (req.session.user) {
-      req.session.save((err) => {
-        if (!err) {
-          res.send({loggedIn: true, user: req.session.user})
-        }
+    const authHeader = req.headers.authorization
+    if (authHeader) {
+      const token = authHeader.split(' ')[1]
+      jwt.verify(token, accessTokenSecret, (err, user) => {
+        if (err) return 
+        req.user = user
+        res.send(user)
       })
     } else {
       res.send({loggedIn: false})
@@ -35,7 +43,7 @@ module.exports = {
   logout: (req, res) => {
     if (req.session.user) {
       User.getById(req.db, req.session.user[0].id_user, (err, result) => {
-        if (err) return console.error(err)
+        if (err) return 
         req.session.destroy()
         res.send(result)
       })

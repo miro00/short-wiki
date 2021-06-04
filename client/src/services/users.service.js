@@ -8,7 +8,11 @@ class UsersDataService {
     return http.post('/users/login', data)
   }
   getLogin() {
-    return http.get('/users/login')
+    return http.get('/users/login', {
+      headers: {
+        "Authorization": localStorage.getItem('token')
+      }
+    })
   }
   logOut(id) {
     return http.get('/users/logout')
