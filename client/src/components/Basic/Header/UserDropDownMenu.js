@@ -9,12 +9,14 @@ export default function UserDropDownMenu(props) {
   const  { loginStatus } = useContext(AppContext)
 
   function logOutEvent() {
-    UserDataService.logOut(props.userId)
-      .then((res) => {
-        if (res) {
-          window.location.reload()
-        }
-      })
+    localStorage.removeItem('token')
+    window.location.reload()
+    // UserDataService.logOut(props.userId)
+    //   .then((res) => {
+    //     if (res) {
+    //       window.location.reload()
+    //     }
+    //   })
   }
 
   return (

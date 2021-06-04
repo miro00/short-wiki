@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 const cors = require('cors')
+require('dotenv').config()
+
 
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
@@ -21,17 +23,19 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use(cookieParser())
-app.use(session({
-  key: "userId",
-  secret: "qwert123", // FIXME: сменить
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    maxAge: 1000 * 60 * 60 * 24,
-    httpOnly: false
-  },
-}))
+
+
+// app.use(cookieParser())
+// app.use(session({
+//   key: "userId",
+//   secret: "qwert123", // FIXME: сменить
+//   resave: false,
+//   saveUninitialized: false,
+//   cookie: {
+//     maxAge: 1000 * 60 * 60 * 24,
+//     httpOnly: false
+//   },
+// }))
 
 
 const categoriesRouter = require('./routes/categories')

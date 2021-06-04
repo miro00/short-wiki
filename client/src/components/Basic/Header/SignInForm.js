@@ -17,8 +17,9 @@ export default function SignInForm() {
         if (res.data.message) {
           setErrorStatus(res.data.message)
         } else {
-          window.location.reload()
+          localStorage.setItem("token", `Bearer ${res.data.token}`)
           setErrorStatus("")
+          window.location.reload()
         }
       })
   }
