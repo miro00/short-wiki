@@ -1,0 +1,42 @@
+@import "../../../scss/vars";
+
+
+.AddUser {
+  width: 100%;
+  .form-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .form-item {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-bottom: 6px;
+      }
+      input {
+        height: 40px;
+        padding: 0 10px;
+        &::placeholder {
+          color: #a9a9a9;
+        }
+      }
+      button[type="submit"] {
+        height: 40px;
+        cursor: pointer;
+        transition: background-color .2s;
+        background-color: $header-bg-color;
+        color: #fff;
+        &:hover {
+          background-color: #1e9478;
+        }
+      }
+
+      input, button[type="submit"] {
+        border: 1px solid #dfdfe0;
+        outline: none;
+        border-radius: 3px;
+      }
+    }
+  }
+}

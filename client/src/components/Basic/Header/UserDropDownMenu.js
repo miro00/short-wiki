@@ -21,7 +21,7 @@ export default function UserDropDownMenu(props) {
     <div className="dropDownMenu">
       <div className="dropDownMenu-items">
         {loginStatus.user_group === 1 ? 
-        <Link to="/control" className="dropDownMenu-item" style={{color: '#000'}}>
+        <Link to="/control" className="dropDownMenu-item" style={{color: '#000'}} >
           Админ-панель
         </Link>
         : null}

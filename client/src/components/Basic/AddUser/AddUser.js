@@ -21,12 +21,10 @@ export default function AddUser() {
     <form className="AddUser">
       <div className="form-items">
         <div className="form-item">
-          <label htmlFor="">Логин</label>
-          <input type="text" />
+          <input type="text" placeholder="Логин"/>
         </div>
         <div className="form-item">
-          <label htmlFor="">Пароль</label>
-          <input type="text" />
+          <input type="password" placeholder="Пароль"/>
         </div>
         <div className="form-item">
           <SelectInput
